@@ -361,8 +361,8 @@ const DEFAULT_WEEKS = [
     {name:'MON',num:'8',key:'jun8',sessions:[]},
     {name:'TUE',num:'9',key:'jun9',sessions:[]},
     {name:'WED',num:'10',key:'jun10',sessions:[]},
-    {name:'THU',num:'11',key:'jun11',sessions:[{t:'Pre-camp',s:'camp',location:'Levice'}]},
-    {name:'FRI',num:'12',key:'jun12',sessions:[{t:'Pre-camp',s:'camp',location:'Levice'}]},
+    {name:'THU',num:'11',key:'jun11',sessions:[{t:'10:00–12:00',s:'camp',location:'Levice PC'},{t:'17:00–19:00',s:'camp',location:'Levice PC'}]},
+    {name:'FRI',num:'12',key:'jun12',sessions:[{t:'10:00–12:00',s:'camp',location:'Levice PC'},{t:'17:00–19:00',s:'camp',location:'Levice PC'}]},
     {name:'SAT',num:'13',key:'jun13',sessions:[{t:'Rest',s:'rest'}]},
     {name:'SUN',num:'14',key:'jun14',sessions:[{t:'Rest',s:'rest'},{t:'17:00–19:00',s:'low',location:'Vietn.'}]},
   ]},
@@ -628,7 +628,17 @@ function render() {
       if (!vis && currentFilter !== 'all') {
         dEl.innerHTML = `<div class="day-header"><span class="day-name">${day.name}</span><span class="day-num" style="color:var(--text3)">${day.num}</span></div>`;
       } else {
-        const pills = sessions.map(pillHTML).join('');
+        // Filter sessions if a specific filter is active
+        const visibleSessions = (currentFilter === 'all') ? sessions : sessions.filter(s => {
+          if (currentFilter === 'game') return s.s === 'game';
+          if (currentFilter === 'gopass') return s.gopass || s.location === 'GoPass' || s.location === 'Gopass Arena';
+          if (currentFilter === 'notape') return s.s === 'notape';
+          if (currentFilter === 'training') return ['low','med','high'].includes(s.s);
+          if (currentFilter === 'practice') return ['low','med','high','notape'].includes(s.s);
+          if (currentFilter === 'rest') return s.s === 'rest';
+          return true;
+        });
+        const pills = visibleSessions.map(pillHTML).join('');
         const hint = sessions.length === 0 ? '<div class="add-hint">+ add</div>' : '<div class="add-hint">✏ edit</div>';
         const hist = liveHistory[day.key];
         const histBadge = hist && hist.length > 0 ? '<div class="day-hist-badge" title="Has edit history"></div>' : '';
