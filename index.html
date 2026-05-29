@@ -453,6 +453,7 @@ window.connectFirebase = async function() {
 };
 
 async function launchApp() {
+  if (!db) { setSyncStatus('off', 'Not connected'); return; }
   document.getElementById('setup-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
 
@@ -803,7 +804,10 @@ document.getElementById('username-input').addEventListener('keydown', e => {
 
 // ─── INIT ────────────────────────────────────────────────────────────────
 selectType('low');
-launchApp().then(() => checkUsername());
+tryAutoConnect().then(() => checkUsername()).catch(e => {
+  console.error('Init error:', e);
+  setSyncStatus('off', 'Connection failed');
+});
 </script>
 </body>
 </html>
