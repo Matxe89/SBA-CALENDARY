@@ -14,7 +14,7 @@
     --med-bg:#7a4a00;   --med-text:#ffffff;
     --high-bg:#8b0000;  --high-text:#ffffff;
     --game-bg:#2d1507;  --game-text:#ffffff;
-    --eval-bg:#0d1f33;  --eval-text:#ffffff;
+    --eval-bg:#0a1a3d;  --eval-text:#ffffff;
     --camp-bg:#1a1033;  --camp-text:#ffffff;
     --travel-bg:#1e0d33;--travel-text:#ffffff;
     --rest-bg:#e2e8f0;  --rest-text:#1e293b;
@@ -99,7 +99,7 @@
   .p-game{background:var(--game-bg);color:var(--game-text);border-color:rgba(251,146,60,0.2);}
   .p-eval{background:var(--eval-bg);color:var(--eval-text);border-color:rgba(96,165,250,0.2);}
   .p-camp{background:var(--camp-bg);color:var(--camp-text);border-color:rgba(167,139,250,0.2);}
-  .p-travel{background:var(--travel-bg);color:var(--travel-text);border-color:rgba(192,132,252,0.2);}
+  .p-travel{background:var(--travel-bg);color:var(--travel-text);border-color:rgba(59,130,246,0.3);}
   .p-rest{background:var(--rest-bg);color:var(--rest-text);border-color:rgba(71,85,105,0.3);}
 
   /* MODAL */
@@ -135,12 +135,12 @@
   .type-btn.selected{border-width:2px;font-weight:600;}
   .type-btn[data-type="notape"].selected{background:var(--notape-bg);color:#ffffff;border-color:#38bdf8;}
   .type-btn[data-type="low"].selected{background:var(--low-bg);color:#ffffff;border-color:#4ade80;}
-  .type-btn[data-type="med"].selected{background:var(--med-bg);color:#ffffff;border-color:#f59e0b;}
+  .type-btn[data-type="med"].selected{background:var(--med-bg);color:#ffffff;border-color:#3b82f6;}
   .type-btn[data-type="high"].selected{background:var(--high-bg);color:#ffffff;border-color:#ef4444;}
   .type-btn[data-type="game"].selected{background:var(--game-bg);color:#ffffff;border-color:#fb923c;}
-  .type-btn[data-type="eval"].selected{background:var(--eval-bg);color:#ffffff;border-color:#60a5fa;}
+  .type-btn[data-type="eval"].selected{background:var(--eval-bg);color:#ffffff;border-color:#3b82f6;}
   .type-btn[data-type="camp"].selected{background:var(--camp-bg);color:#ffffff;border-color:#a78bfa;}
-  .type-btn[data-type="travel"].selected{background:var(--travel-bg);color:#ffffff;border-color:#c084fc;}
+  .type-btn[data-type="travel"].selected{background:var(--travel-bg);color:#ffffff;border-color:#3b82f6;}
   .type-btn[data-type="rest"].selected{background:var(--rest-bg);color:var(--rest-text);border-color:#cbd5e1;}
   .gopass-toggle{display:flex;align-items:center;gap:7px;cursor:pointer;font-size:12px;color:var(--text2);user-select:none;}
   .gopass-toggle input{accent-color:var(--accent);width:13px;height:13px;cursor:pointer;}
@@ -242,7 +242,7 @@
         <div class="sync-dot" id="sync-dot"></div>
         <span id="sync-text">Connecting...</span>
       </div>
-      <div class="badge">June – July 2025</div>
+      <div class="badge">June – July 2026</div>
     </div>
   </div>
 
@@ -254,7 +254,7 @@
     <div class="leg"><div class="leg-dot" style="background:#fb923c"></div>Game</div>
     <div class="leg"><div class="leg-dot" style="background:#c084fc"></div>Travel</div>
     <div class="leg"><div class="leg-dot" style="background:#a78bfa"></div>Camp</div>
-    <div class="leg"><div class="leg-dot" style="background:#60a5fa"></div>Physical eval.</div>
+    <div class="leg"><div class="leg-dot" style="background:#3b82f6"></div>Physical eval.</div>
     <div class="leg"><div class="leg-dot" style="background:#e2e8f0"></div>Rest</div>
   </div>
 
@@ -334,8 +334,8 @@
 
 <!-- Firebase SDK -->
 <script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getFirestore, doc, setDoc, onSnapshot, collection, writeBatch, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, doc, setDoc, onSnapshot, collection, writeBatch } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 // ─── DEFAULT DATA ─────────────────────────────────────────────────────────
 const DEFAULT_WEEKS = [
@@ -343,18 +343,18 @@ const DEFAULT_WEEKS = [
     {name:'MON',num:'8',key:'jun8',sessions:[]},
     {name:'TUE',num:'9',key:'jun9',sessions:[]},
     {name:'WED',num:'10',key:'jun10',sessions:[]},
-    {name:'THU',num:'11',key:'jun11',sessions:[{t:'Pre-camp',s:'camp'}]},
-    {name:'FRI',num:'12',key:'jun12',sessions:[{t:'Pre-camp',s:'camp'}]},
+    {name:'THU',num:'11',key:'jun11',sessions:[{t:'Pre-camp',s:'camp',location:'Levice'}]},
+    {name:'FRI',num:'12',key:'jun12',sessions:[{t:'Pre-camp',s:'camp',location:'Levice'}]},
     {name:'SAT',num:'13',key:'jun13',sessions:[{t:'Rest',s:'rest'}]},
-    {name:'SUN',num:'14',key:'jun14',sessions:[{t:'Rest',s:'rest'},{t:'Basketball',s:'low'}]},
+    {name:'SUN',num:'14',key:'jun14',sessions:[{t:'Rest',s:'rest'},{t:'17:00–19:00',s:'low',location:'Vietnamska'}]},
   ]},
   {label:"Camp Week 1 · June 15–21",sub:"Golian & Stanko available",days:[
-    {name:'MON',num:'15',key:'jun15',sessions:[{t:'Physical eval.',s:'eval'},{t:'Basketball',s:'low'}]},
+    {name:'MON',num:'15',key:'jun15',sessions:[{t:'10:00–12:00',s:'eval',location:'Vietnamska'},{t:'18:00–20:00',s:'low',location:'Vietnamska'}]},
     {name:'TUE',num:'16',key:'jun16',sessions:[{gopass:true,t:'11:00–13:00',s:'notape'},{gopass:true,t:'17:30–19:00',s:'low'}]},
     {name:'WED',num:'17',key:'jun17',sessions:[{gopass:true,t:'10:00–12:00',s:'notape'},{gopass:true,t:'18:00–19:30',s:'med'}]},
     {name:'THU',num:'18',key:'jun18',sessions:[{t:'✈ Travel',s:'travel'}]},
-    {name:'FRI',num:'19',key:'jun19',sessions:[{t:'🏀 Estonia 1',s:'game'}]},
-    {name:'SAT',num:'20',key:'jun20',sessions:[{t:'🏀 Estonia 2',s:'game'}]},
+    {name:'FRI',num:'19',key:'jun19',sessions:[{t:'🏀 EST (TBD)',s:'game',location:'Tallinn'}]},
+    {name:'SAT',num:'20',key:'jun20',sessions:[{t:'🏀 EST (TBD)',s:'game',location:'Tallinn'}]},
     {name:'SUN',num:'21',key:'jun21',sessions:[{t:'✈ Travel',s:'travel'}]},
   ]},
   {label:"Key week · June 22–28",sub:"Golian & Stanko only 27–28",days:[
@@ -362,36 +362,36 @@ const DEFAULT_WEEKS = [
     {name:'TUE',num:'23',key:'jun23',sessions:[{gopass:true,t:'8:30–10:30',s:'notape'},{gopass:true,t:'16:30–18:00',s:'med'}]},
     {name:'WED',num:'24',key:'jun24',sessions:[{gopass:true,t:'8:30–10:30',s:'notape'},{gopass:true,t:'18:00–19:30',s:'low'}]},
     {name:'THU',num:'25',key:'jun25',sessions:[{gopass:true,t:'8:30–10:30',s:'notape'},{gopass:true,t:'16:30–18:00',s:'high'}]},
-    {name:'FRI',num:'26',key:'jun26',sessions:[{t:'🚌 Travel',s:'travel'},{t:'🏀 CZE 17:00',s:'game'}]},
+    {name:'FRI',num:'26',key:'jun26',sessions:[{t:'🚌 Travel',s:'travel'},{t:'🏀 CZE 17:00',s:'game',location:'Opava'}]},
     {name:'SAT',num:'27',key:'jun27',sessions:[{t:'Rest',s:'rest'},{gopass:true,t:'16:30–18:00',s:'notape'}]},
-    {name:'SUN',num:'28',key:'jun28',sessions:[{t:'🏀 Switzerland',s:'game'},{t:'Rest',s:'rest'}]},
+    {name:'SUN',num:'28',key:'jun28',sessions:[{t:'🏀 SWI (TBD)',s:'game',location:'Samorín'},{t:'Rest',s:'rest'}]},
   ]},
   {label:"June 29 – July 5",sub:"",days:[
     {name:'MON',num:'29',key:'jun29',sessions:[{t:'Rest',s:'rest'}]},
-    {name:'TUE',num:'30',key:'jun30',sessions:[{gopass:true,t:'8:30–10:30',s:'notape'},{gopass:true,t:'16:30–17:30',s:'med'}]},
-    {name:'WED',num:'1/7',key:'jul1',sessions:[{gopass:true,t:'8:30–10:30',s:'notape'},{gopass:true,t:'16:30–17:30',s:'low'}]},
-    {name:'THU',num:'2',key:'jul2',sessions:[{t:'🏀 Switzerland 11:00',s:'game'},{t:'Basketball',s:'low'}]},
+    {name:'TUE',num:'30',key:'jun30',sessions:[{gopass:true,t:'8:30–10:30',s:'notape'},{gopass:true,t:'16:00–18:00',s:'med'}]},
+    {name:'WED',num:'1/7',key:'jul1',sessions:[{gopass:true,t:'8:30–10:30',s:'notape'},{gopass:true,t:'16:00–18:00',s:'low'}]},
+    {name:'THU',num:'2',key:'jul2',sessions:[{t:'🏀 SWI 11:00',s:'game',location:'Samorín'},{t:'Basketball',s:'low'}]},
     {name:'FRI',num:'3',key:'jul3',sessions:[{t:'Rest',s:'rest'}]},
     {name:'SAT',num:'4',key:'jul4',sessions:[{t:'No tape',s:'notape'},{t:'Basketball',s:'med'}]},
     {name:'SUN',num:'5',key:'jul5',sessions:[{t:'No tape',s:'notape'},{t:'Basketball',s:'low'}]},
   ]},
   {label:"European B U20 · Group Stage · July 6–12",sub:"Golian & Stanko available",days:[
-    {name:'MON',num:'6',key:'jul6',sessions:[{t:'No tape',s:'notape'},{t:'🏀 Portugal 18:30',s:'game'}]},
+    {name:'MON',num:'6',key:'jul6',sessions:[{t:'No tape',s:'notape'},{t:'🏀 POR 18:30',s:'game'}]},
     {name:'TUE',num:'7',key:'jul7',sessions:[{t:'Rest',s:'rest'}]},
-    {name:'WED',num:'8',key:'jul8',sessions:[{t:'No tape',s:'notape'},{t:'Rest',s:'rest'}]},
-    {name:'THU',num:'9',key:'jul9',sessions:[{t:'Basketball',s:'low'},{t:'No tape',s:'notape'}]},
-    {name:'FRI',num:'10',key:'jul10',sessions:[{t:'🏀 MKD',s:'game'}]},
-    {name:'SAT',num:'11',key:'jul11',sessions:[{t:'🏀 SWE',s:'game'}]},
-    {name:'SUN',num:'12',key:'jul12',sessions:[{t:'🏀 AZE',s:'game'}]},
+    {name:'WED',num:'8',key:'jul8',sessions:[{t:'Arrival day',s:'travel'}]},
+    {name:'THU',num:'9',key:'jul9',sessions:[{t:'19:30–20:30',s:'notape',location:'Gopass Arena'}]},
+    {name:'FRI',num:'10',key:'jul10',sessions:[{t:'09:45–10:30',s:'notape',location:'Gopass Arena'},{t:'🏀 MKD 18:00',s:'game',location:'Gopass Arena'}]},
+    {name:'SAT',num:'11',key:'jul11',sessions:[{t:'09:45–10:30',s:'notape',location:'Gopass Arena'},{t:'🏀 SWE 18:00',s:'game',location:'Gopass Arena'}]},
+    {name:'SUN',num:'12',key:'jul12',sessions:[{t:'09:45–10:30',s:'notape',location:'Gopass Arena'},{t:'🏀 AZE 18:00',s:'game',location:'Gopass Arena'}]},
   ]},
   {label:"European B U20 · Final Stage · July 13–19",sub:"Golian & Stanko available",days:[
-    {name:'MON',num:'13',key:'jul13',sessions:[{t:'Rest',s:'rest'}]},
-    {name:'TUE',num:'14',key:'jul14',sessions:[{t:'Rest',s:'rest'}]},
-    {name:'WED',num:'15',key:'jul15',sessions:[{t:'🏀 IRL',s:'game'}]},
-    {name:'THU',num:'16',key:'jul16',sessions:[{t:'Rest',s:'rest'}]},
-    {name:'FRI',num:'17',key:'jul17',sessions:[{t:'🏀 Game (TBD)',s:'game'}]},
-    {name:'SAT',num:'18',key:'jul18',sessions:[{t:'🏀 Game (TBD)',s:'game'}]},
-    {name:'SUN',num:'19',key:'jul19',sessions:[{t:'🏀 Game (TBD)',s:'game'}]},
+    {name:'MON',num:'13',key:'jul13',sessions:[{t:'13:30–14:30',s:'notape',location:'Gopass Arena'},{t:'19:30–20:30',s:'notape',location:'Vietnamska'}]},
+    {name:'TUE',num:'14',key:'jul14',sessions:[{t:'17:30–18:45',s:'notape',location:'Vietnamska'}]},
+    {name:'WED',num:'15',key:'jul15',sessions:[{t:'09:00–09:45',s:'notape',location:'Gopass Arena'},{t:'🏀 IRL 18:00',s:'game',location:'Gopass Arena'}]},
+    {name:'THU',num:'16',key:'jul16',sessions:[{t:'TBD (post group phase)',s:'rest'}]},
+    {name:'FRI',num:'17',key:'jul17',sessions:[{t:'Practice TBD',s:'rest'},{t:'🏀 Game (TBD)',s:'game',location:'Gopass Arena'}]},
+    {name:'SAT',num:'18',key:'jul18',sessions:[{t:'Practice TBD',s:'rest'},{t:'🏀 Game (TBD)',s:'game',location:'Gopass Arena'}]},
+    {name:'SUN',num:'19',key:'jul19',sessions:[{t:'Practice TBD',s:'rest'},{t:'🏀 Game (TBD)',s:'game',location:'Gopass Arena'}]},
   ]},
 ];
 
@@ -432,7 +432,7 @@ window.connectFirebase = async function() {
   }
 
   try {
-    const app = initializeApp({
+    const app = getApps().length ? getApp() : initializeApp({
     apiKey: "AIzaSyBoUsRcxZ9lqjdVmJi6acZ5k0gjKwVrD2E",
     authDomain: "calendario-eslovaquia.firebaseapp.com",
     projectId: "calendario-eslovaquia",
@@ -506,14 +506,15 @@ async function seedDatabase() {
 
 // ─── AUTO-CONNECT if config saved ────────────────────────────────────────
 async function tryAutoConnect() {
-  const app = initializeApp({
+  const cfg = {
     apiKey: "AIzaSyBoUsRcxZ9lqjdVmJi6acZ5k0gjKwVrD2E",
     authDomain: "calendario-eslovaquia.firebaseapp.com",
     projectId: "calendario-eslovaquia",
     storageBucket: "calendario-eslovaquia.firebasestorage.app",
     messagingSenderId: "531012562985",
     appId: "1:531012562985:web:ff244d746a8fcbfdccac38"
-  });
+  };
+  const app = getApps().length ? getApp() : initializeApp(cfg);
   db = getFirestore(app);
   await launchApp();
 }
